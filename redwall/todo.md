@@ -3,14 +3,14 @@
   - tested by seeing that I can edit the Jinja template in the frontend
 
 ## CRUD and persisting files
-[ ] [server] create db struct and define interface to backend, hooking this up to the edit flow
+[x] [server] create db struct and define interface to backend, hooking this up to the edit flow
   - list_notes, get_note, update_note, create_note, search_notes, delete_note
   - tested by putting static requests in the backend and returning those
   - title, content
-[ ] [server] add sqlite3 database with table of markdown files
+[x] [server] add sqlite3 database with table of markdown files
   - create db, add to gitignore
   - adding a initialize.db script
-[ ] [server][edit] implement reads from the sqlite3 database
+[x] [server][edit] implement reads from the sqlite3 database
   - statically create some files in the sqlite3 database
   - implement get_note
 [ ] [frontend][edit] implement reads
@@ -19,7 +19,7 @@
   - function that receives markdown string and renders to html
 [ ] [frontend][edit] on load of a note, render the markdown server side
   - populate the html file textarea with the right thing in Jinja
-[ ] [server][edit] implement updates to the sqlite3 database
+[x] [server][edit] implement updates to the sqlite3 database
   - implement that dank write endpoint, update_note
   - add post endpoint
   - be able to edit the title or the content
@@ -32,7 +32,7 @@
   - add new sqlite3 query
 [ ] [front] implement main page to display list of all current notes
   - create new jinja template
-[ ] [server][edit] implement creates to the sqlite3 database]
+[x] [server][edit] implement creates to the sqlite3 database]
   - implement that dank write endpoint, create_note
   - add post endpoint
 [ ] [frontend][edit] impleemnt creates
