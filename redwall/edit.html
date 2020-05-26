@@ -1,0 +1,32 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title> {% "Redwall - {}".format(post_id) %} </title>
+</head>
+<body>
+Hello world
+post id: 1234
+
+<div id="input" style="
+    width: 100%;
+    min-height: 500px;
+">
+   <form style="width:auto;height: 500px;" action="/meow" id="usrform">
+  Name: <textarea type="text" name="usrname" style="width: 100%;height: 80%;" onchange="document.getElementById('output').innerHTML = marked(document.getElementById('input2').value)" id="input2"></textarea>
+  <input type="submit">
+</form>  
+</div>
+<div id="output"><p>asdf</p>
+<p>asdfsdfasdfff</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+    document.getElementById('output').innerHTML =
+      marked('# Marked in the browser\n\nRendered by **marked**.');
+</script>
+
+
+</body>
