@@ -1,5 +1,5 @@
 from redwall import __version__
-from redwall.redwall import Note, Storage
+from redwall.redwall import Note, RenderEngine, Storage
 
 
 def test_version():
@@ -49,7 +49,17 @@ def test_db_create_and_get_and_update():
     assert note2.title == new_title
     assert note2.content == new_content
 
-if __name__ == '__main__':
+def test_render_engine():
+    r = RenderEngine()
+    markdown = "hello world"
+    html = r.render_md_to_html(markdown)
+    assert html == "<p>hello world</p>\n"
+
+def run_all_tests():
     test_note_creation()
     test_db_create_and_get()
     test_db_create_and_get_and_update()
+    test_render_engine()
+
+if __name__ == '__main__':
+    run_all_tests()

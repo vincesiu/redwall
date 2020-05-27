@@ -1,10 +1,15 @@
 from flask import (
     Flask,
     render_template,
+    request,
 )
+import pypandoc
 import sqlite3
 from typing import Optional
-from uuid import uuid4
+from uuid import (
+   uuid4,
+   UUID,
+)
 
 class Note:
     def __init__(self, title: str, content: str, id: Optional[str] = None):
@@ -14,6 +19,14 @@ class Note:
             self.id = uuid4().hex
         else:
             self.id = id
+
+    @classmethod
+    def format_id_for_url(cls, url_id: str) -> str:
+       return UUID(id).hex
+
+    @classmethod
+    def parse_id_from_url(cls, id: str) -> str:
+        return str(UUID(id))
 
 class Storage:
     def __init__(self):
@@ -51,13 +64,33 @@ class Storage:
     def delete_note(self):
         raise NotImplementedError()
 
+class RenderEngine:
+    def __init__(self):
+        pass
+
+    def render_md_to_html(self, input_markdown: str) -> str:
+        return pypandoc.convert_text(input_markdown, 'html', format='md')
 
 app = Flask(__name__)
 storage = Storage()
+render_engine = RenderEngine()
 
 @app.route('/')
 def list_notes():
     return 'Hello, World!'
+
+@app.route('/render_markdown', methods=['POST'])
+def render_markdown():
+    """
+    will throw if "content" key is not supplied. example response
+
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+    <title>400 Bad Request</title>
+    <h1>Bad Request</h1>
+    <p>The browser (or proxy) sent a request that this server could not understand.</p>
+    """
+    unrendered = request.form["content"]
+    return render_engine.render_md_to_html(unrendered)
 
 @app.route('/<post_id>')
 def edit_note(post_id):
