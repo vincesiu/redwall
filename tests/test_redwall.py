@@ -48,3 +48,8 @@ def test_db_create_and_get_and_update():
     note2 = s.get_note(note1.id)
     assert note2.title == new_title
     assert note2.content == new_content
+
+if __name__ == '__main__':
+    test_note_creation()
+    test_db_create_and_get()
+    test_db_create_and_get_and_update()

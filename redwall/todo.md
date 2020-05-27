@@ -13,7 +13,7 @@
 [x] [server][edit] implement reads from the sqlite3 database
   - statically create some files in the sqlite3 database
   - implement get_note
-[ ] [frontend][edit] implement reads
+[x] [frontend][edit] implement reads
   - populate the html file textarea with the right thing in Jinja
 [ ] [server] on initial read, implement function to send markdwon to html in pandoc
   - function that receives markdown string and renders to html

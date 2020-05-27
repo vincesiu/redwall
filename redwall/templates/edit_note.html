@@ -3,30 +3,27 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-
-  <title> {{ "Redwall - {}".format(post_id) }} </title>
+  <title> {{ "Redwall - {}".format(title) }} </title>
 </head>
 <body>
-Hello world
-post id: 1234
 
-<div id="input" style="
-    width: 100%;
-    min-height: 500px;
-">
-   <form style="width:auto;height: 500px;" action="/meow" id="usrform">
-  Name: <textarea type="text" name="usrname" style="width: 100%;height: 80%;" onchange="document.getElementById('output').innerHTML = marked(document.getElementById('input2').value)" id="input2"></textarea>
-  <input type="submit">
-</form>  
+Hello world
+
+<div id="input_container" style="width: 100%; min-height: 500px;">
+    <form style="width:auto;height: 500px;" action="/meow">
+        <textarea type="text" style="width: 100%;height: 80%;" onchange="document.getElementById('output_container').innerHTML = marked(document.getElementById('input_content').value)" id="input_content">{{ content }}</textarea>
+        <input type="submit">
+    </form>  
 </div>
-<div id="output"><p>asdf</p>
-<p>asdfsdfasdfff</p>
+
+<div id="output_container"><p>asdf</p>
+<p>you should not see this</p>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
     document.getElementById('output').innerHTML =
       marked('# Marked in the browser\n\nRendered by **marked**.');
 </script>
-
 
 </body>
