@@ -11,13 +11,13 @@ Hello world
 
 <div id="input_container" style="width: 100%; min-height: 500px;">
     <form style="width:auto;height: 500px;" action="/meow">
-        <textarea type="text" style="width: 100%;height: 80%;" onchange="document.getElementById('output_container').innerHTML = marked(document.getElementById('input_content').value)" id="input_content">{{ content }}</textarea>
+        <textarea type="text" style="width: 100%;height: 80%;" onchange="document.getElementById('output_container').innerHTML = marked(document.getElementById('input_content').value)" id="input_content">{{ unrendered_content }}</textarea>
         <input type="submit">
     </form>  
 </div>
 
-<div id="output_container"><p>asdf</p>
-<p>you should not see this</p>
+<div id="output_container">
+{{rendered_content | safe}}
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>

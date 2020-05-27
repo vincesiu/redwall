@@ -94,9 +94,13 @@ def render_markdown():
 
 @app.route('/<post_id>')
 def edit_note(post_id):
-    import uuid
-    id = UUID('840bb90445e3499a91815e11a27ea1c6')
+    id = '840bb90445e3499a91815e11a27ea1c6'
     note = storage.get_note(id)
     assert note is not None
 
-    return render_template("edit_note.html", title=note.title, content=note.content)
+    return render_template(
+        "edit_note.html",
+        title=note.title,
+        unrendered_content=note.content,
+        rendered_content=render_engine.render_md_to_html(note.content),
+    )
