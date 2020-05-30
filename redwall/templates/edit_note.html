@@ -8,9 +8,11 @@
 <body>
 
 <div id="input_container" style="width: 100%; min-height: 500px;">
-    <form style="width:auto;height: 500px;" action="/meow">
+    <form style="width:auto;height: 500px;" id="input_form"> {#  action="/meow"> #}
+        <p id="input_title">{{title}}</p>
+        <p id="input_note_id">{{note_id}}</p>
         <textarea type="text" style="width: 100%;height: 80%;" id="input_content">{{ unrendered_content }}</textarea>
-        <input type="submit">
+        <input type="submit" id="input_submit">
     </form>  
 </div>
 
@@ -20,7 +22,23 @@
 </div>
 
 <script>
-document.getElementById('input_content').addEventListener('change', (event) => {
+function saveNote(event)  {
+    fetch('./save_note', {
+        method:'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            'title': document.getElementById('input_title').innerHTML,
+            'content': document.getElementById('input_content').value,
+            'note_id': document.getElementById('input_note_id').innerHTML
+        })
+    }).then(function(response) {
+      console.log('Successfully saved');
+    })
+};
+
+function renderMarkdown(event) {
   fetch('./render_markdown', {
     method: 'post',
     headers: {
@@ -33,7 +51,10 @@ document.getElementById('input_content').addEventListener('change', (event) => {
   }).then(function(data) {
       document.getElementById('output_container').innerHTML = data;
   });
-});
+};
+
+document.getElementById('input_form').addEventListener('submit', saveNote);
+document.getElementById('input_content').addEventListener('change', renderMarkdown);
 </script>
 
 </body>

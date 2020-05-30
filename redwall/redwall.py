@@ -96,14 +96,24 @@ def render_markdown():
 
 @app.route('/<post_id>')
 def edit_note(post_id):
-#    storage.get_note(post_id)
-    id = '840bb90445e3499a91815e11a27ea1c6'
-    note = storage.get_note(id)
+    note = storage.get_note(post_id)
     assert note is not None
 
     return render_template(
         "edit_note.html",
         title=note.title,
+        note_id=post_id,
         unrendered_content=note.content,
         rendered_content=render_engine.render_md_to_html(note.content),
     )
+
+@app.route('/save_note', methods=['POST'])
+def save_note():
+    print("save note called with {}".format(request.json))
+    note = Note(
+        title = request.json['title'],
+        content = request.json['content'],
+        id = request.json['note_id'],
+    )
+    storage.update_note(note)
+    return "success"
