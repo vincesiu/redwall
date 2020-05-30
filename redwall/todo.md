@@ -17,7 +17,7 @@
   - populate the html file textarea with the right thing in Jinja
 [x] [server] on initial read, implement function to send markdwon to html in pandoc
   - function that receives markdown string and renders to html
-[ ] [frontend][edit] on load of a note, render the markdown server side
+[x] [frontend][edit] on load of a note, render the markdown server side
   - populate the html file textarea with the right thing in Jinja
 [x] [server][edit] implement updates to the sqlite3 database
   - implement that dank write endpoint, update_note
@@ -43,9 +43,9 @@
   - onchange, send the contents of that textarea to the backend
 
 ## change the html parser
-[ ] [server] add new post endpoint to receive + send back markdown parsed as html
+[x] [server] add new post endpoint to receive + send back markdown parsed as html
   - be able to send markdown, return html
-[ ] [front] post query to markdown -> other parser
+[x] [front] post query to markdown -> other parser
   - change the frontend parser from the markdown js library to this
 [ ] [front] implement debouncing
   - trailing edge probably

@@ -7,23 +7,33 @@
 </head>
 <body>
 
-Hello world
-
 <div id="input_container" style="width: 100%; min-height: 500px;">
     <form style="width:auto;height: 500px;" action="/meow">
-        <textarea type="text" style="width: 100%;height: 80%;" onchange="document.getElementById('output_container').innerHTML = marked(document.getElementById('input_content').value)" id="input_content">{{ unrendered_content }}</textarea>
+        <textarea type="text" style="width: 100%;height: 80%;" id="input_content">{{ unrendered_content }}</textarea>
         <input type="submit">
     </form>  
 </div>
 
 <div id="output_container">
-{{rendered_content | safe}}
+    {# The safe filter is used to render html without escape codes #}
+    {{rendered_content | safe}}
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-    document.getElementById('output').innerHTML =
-      marked('# Marked in the browser\n\nRendered by **marked**.');
+document.getElementById('input_content').addEventListener('change', (event) => {
+  fetch('./render_markdown', {
+    method: 'post',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({content: event.target.value})
+  }).then(function(response) {
+      console.log('Markdown rendered to html: ', response);
+    return response.json();
+  }).then(function(data) {
+      document.getElementById('output_container').innerHTML = data;
+  });
+});
 </script>
 
 </body>

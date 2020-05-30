@@ -3,6 +3,7 @@ from flask import (
     render_template,
     request,
 )
+import json
 import pypandoc
 import sqlite3
 from typing import Optional
@@ -89,11 +90,13 @@ def render_markdown():
     <h1>Bad Request</h1>
     <p>The browser (or proxy) sent a request that this server could not understand.</p>
     """
-    unrendered = request.form["content"]
-    return render_engine.render_md_to_html(unrendered)
+    print("render markdown called with the arguments {}".format(request.json))
+    unrendered = request.json["content"]
+    return json.dumps(render_engine.render_md_to_html(unrendered))
 
 @app.route('/<post_id>')
 def edit_note(post_id):
+#    storage.get_note(post_id)
     id = '840bb90445e3499a91815e11a27ea1c6'
     note = storage.get_note(id)
     assert note is not None
