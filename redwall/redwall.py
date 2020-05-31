@@ -6,7 +6,7 @@ from flask import (
 import json
 import pypandoc
 import sqlite3
-from typing import Optional
+from typing import List, Optional
 from uuid import (
    uuid4,
    UUID,
@@ -33,8 +33,21 @@ class Storage:
     def __init__(self):
         self.connection = sqlite3.connect('/Users/vincesiu/dev/redwall/redwall/redwall.db')
 
-    def list_notes(self):
-        raise NotImplementedError()
+    def list_notes(self) -> List[Note]:
+        cursor = self.connection.cursor()
+        query = 'select id, title, content from notes'
+        cursor.execute(query)
+        results = cursor.fetchall()
+        if results == None:
+           return None
+        notes = []
+        for result in results:
+            notes.append(Note(
+                title=result[1],
+                content=result[2],
+                id=result[0],
+            ))
+        return notes
 
     def create_note(self, note: Note):
         cursor = self.connection.cursor()
@@ -76,9 +89,24 @@ app = Flask(__name__)
 storage = Storage()
 render_engine = RenderEngine()
 
+from collections import namedtuple
+FormattedNote = namedtuple('FormattedNote', ['href', 'caption'])
+
+
 @app.route('/')
 def list_notes():
-    return 'Hello, World!'
+    notes = storage.list_notes()
+    formatted_notes = []
+    for note in notes:
+        formatted_notes.append(FormattedNote(
+            href="./{}".format(note.id),
+            caption=note.title,
+        ))
+
+    return render_template(
+        "list_notes.html",
+        notes=formatted_notes
+        )
 
 @app.route('/render_markdown', methods=['POST'])
 def render_markdown():
@@ -107,9 +135,9 @@ def edit_note(post_id):
         rendered_content=render_engine.render_md_to_html(note.content),
     )
 
-@app.route('/save_note', methods=['POST'])
-def save_note():
-    print("save note called with {}".format(request.json))
+@app.route('/update_note', methods=['POST'])
+def update_note():
+    print("Update note called with {}".format(request.json))
     note = Note(
         title = request.json['title'],
         content = request.json['content'],

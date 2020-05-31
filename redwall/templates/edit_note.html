@@ -22,8 +22,8 @@
 </div>
 
 <script>
-function saveNote(event)  {
-    fetch('./save_note', {
+function updateNote(event)  {
+    fetch('./update_note', {
         method:'post',
         headers: {
             'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ function saveNote(event)  {
             'note_id': document.getElementById('input_note_id').innerHTML
         })
     }).then(function(response) {
-      console.log('Successfully saved');
+      console.log('Successfully updated note id:', document.getElementById('input_note_id').innertHTML);
     })
 };
 
@@ -53,7 +53,7 @@ function renderMarkdown(event) {
   });
 };
 
-document.getElementById('input_form').addEventListener('submit', saveNote);
+document.getElementById('input_form').addEventListener('submit', updateNote);
 document.getElementById('input_content').addEventListener('change', renderMarkdown);
 </script>
 

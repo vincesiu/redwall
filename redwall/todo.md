@@ -23,14 +23,14 @@
   - implement that dank write endpoint, update_note
   - add post endpoint
   - be able to edit the title or the content
-[ ] [frontend][edit] impleemnt updates
+[x] [frontend][edit] impleemnt updates
   - add fetch usage in the frontend
   - update the title or the content
   - onchange, send the contents of that textarea to the backend
-[ ] [server] implement main page to query list of all the current notes, hyperlinked
+[x] [server] implement main page to query list of all the current notes, hyperlinked
   - need to implement db class
   - add new sqlite3 query
-[ ] [front] implement main page to display list of all current notes
+[x] [front] implement main page to display list of all current notes
   - create new jinja template
 [x] [server][edit] implement creates to the sqlite3 database]
   - implement that dank write endpoint, create_note

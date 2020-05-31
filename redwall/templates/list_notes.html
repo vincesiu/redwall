@@ -1,0 +1,16 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Redwall - All Notes</title>
+</head>
+<body>
+
+    <ul id="navigation">
+    {% for note in notes %}
+        <li><a href="{{ note.href }}">{{ note.caption }}</a></li>
+    {% endfor %}
+    </ul>
+
+</body>
