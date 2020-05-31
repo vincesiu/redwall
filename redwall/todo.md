@@ -35,25 +35,29 @@
 [x] [server][edit] implement creates to the sqlite3 database]
   - implement that dank write endpoint, create_note
   - add post endpoint
+[x] [server] add new post endpoint to receive + send back markdown parsed as html
+  - be able to send markdown, return html
+[x] [front] post query to markdown -> other parser
+  - change the frontend parser from the markdown js library to this
+[ ] [frontend] Implement ability to edit the title
+[ ] [front] implement throttling
+  - 1 second
+[ ] [frontend] Implement ability to go back to the main page
 [ ] [frontend][edit] impleemnt creates
   - make this a separate html page
   - add new button in the main page to create
   - auto-redirect to the edit page
   - add fetch usage in the frontend
   - onchange, send the contents of that textarea to the backend
-
-## change the html parser
-[x] [server] add new post endpoint to receive + send back markdown parsed as html
-  - be able to send markdown, return html
-[x] [front] post query to markdown -> other parser
-  - change the frontend parser from the markdown js library to this
-[ ] [front] implement debouncing
-  - trailing edge probably
+[ ] [backend] implement handling of favicon
+[ ] [backend] add testing
+[ ] [backend] add logging - logging all requests
 
 ## wishlist
 [ ] [server] autosave
-[ ] [server][edit] change the post_id from route to the get parameter
-[ ] [front] markdown css
+[ ] [server][edit] change the post id from route to the get parameter
+[ ] [front] find all the html elements which I need to apply markdown to
+[ ] [front] given all the markdown elements from the previous thign, add css
 [ ] [front] overall page css
 [ ] [server] add extra fields 
   - atime, ctime, mtime, tags
@@ -65,8 +69,6 @@
 [ ] [server] 404 or some other error handling if the post_id does not exist
 [ ] [frontend] 404 error page if the post_id does not exist
 [ ] [server] see what happens if an exception is thrown - 504 or something?
-
-
 [ ] [server] delete note
   - implement db endpoint to delete note
 [ ] [frontend] delete note
@@ -75,6 +77,7 @@
   - redirect page back to main
 
 ## goals
+
 [ ] see all existing notes sorted in chronological order, in order of creation
   - sort by differen parameters (ctime atime mtime)
   - search by title/tag/content
