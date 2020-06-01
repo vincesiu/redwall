@@ -133,6 +133,21 @@ def update_note():
     storage.update_note(note)
     return "success"
 
+@app.route('/create_note', methods=['GET', 'POST'])
+def create_note():
+    if request.method == 'GET':
+        print("Create note called")
+        return render_template("create_note.html")
+
+    if request.method == 'POST':
+        print("Create note called with {}".format(request.json))
+        note = Note(
+            title = request.json['title'],
+            content = request.json['content'],
+        )
+        storage.create_note(note)
+        return json.dumps(note.id)
+
 @app.route('/favicon.ico')
 def favicon():
     return "success"
