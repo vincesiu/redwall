@@ -42,7 +42,7 @@
 [x] [frontend] Implement ability to edit the title
 [x] [front] implement throttling
   - 1 second
-[ ] [frontend] Implement ability to go back to the main page
+[x] [frontend] Implement ability to go back to the main page
 [ ] [frontend][edit] impleemnt creates
   - make this a separate html page
   - add new button in the main page to create
