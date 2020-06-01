@@ -40,7 +40,7 @@
 [x] [front] post query to markdown -> other parser
   - change the frontend parser from the markdown js library to this
 [x] [frontend] Implement ability to edit the title
-[ ] [front] implement throttling
+[x] [front] implement throttling
   - 1 second
 [ ] [frontend] Implement ability to go back to the main page
 [ ] [frontend][edit] impleemnt creates

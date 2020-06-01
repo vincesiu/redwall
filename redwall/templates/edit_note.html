@@ -38,8 +38,11 @@ function updateNote(event)  {
     })
 };
 
-function renderMarkdown(event) {
-  fetch('./render_markdown', {
+function renderMarkdown() {
+	args = arguments;
+	console.log(args);
+	event = args[0];
+    fetch('./render_markdown', {
     method: 'post',
     headers: {
         'Content-Type': 'application/json',
@@ -53,8 +56,22 @@ function renderMarkdown(event) {
   });
 };
 
+function debounce(fn, interval) {
+    var timeoutId = undefined;
+    return function (event) {
+        if (timeoutId !== undefined) {
+            clearTimeout(timeoutId); 
+        }
+
+        timeoutId = setTimeout(() => {
+            fn(event); 
+            timeoutId = undefined;
+        }, interval);
+   }
+}
+
 document.getElementById('input_form').addEventListener('submit', updateNote);
-document.getElementById('input_content').addEventListener('change', renderMarkdown);
+document.getElementById('input_content').addEventListener('input', debounce(renderMarkdown, 1000));
 </script>
 
 </body>

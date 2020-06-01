@@ -122,6 +122,21 @@ def render_markdown():
     unrendered = request.json["content"]
     return json.dumps(render_engine.render_md_to_html(unrendered))
 
+@app.route('/update_note', methods=['POST'])
+def update_note():
+    print("Update note called with {}".format(request.json))
+    note = Note(
+        title = request.json['title'],
+        content = request.json['content'],
+        id = request.json['note_id'],
+    )
+    storage.update_note(note)
+    return "success"
+
+@app.route('/favicon.ico')
+def favicon():
+    return "success"
+
 @app.route('/<post_id>')
 def edit_note(post_id):
     note = storage.get_note(post_id)
@@ -135,13 +150,3 @@ def edit_note(post_id):
         rendered_content=render_engine.render_md_to_html(note.content),
     )
 
-@app.route('/update_note', methods=['POST'])
-def update_note():
-    print("Update note called with {}".format(request.json))
-    note = Note(
-        title = request.json['title'],
-        content = request.json['content'],
-        id = request.json['note_id'],
-    )
-    storage.update_note(note)
-    return "success"
