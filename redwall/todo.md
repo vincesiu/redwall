@@ -50,7 +50,7 @@
   - add fetch usage in the frontend
   - onchange, send the contents of that textarea to the backend
 [x] [frontend] refactor out the javascript functions
-[ ] [frontend] add button to create new note on the main page
+[x] [frontend] add button to create new note on the main page
 [ ] [backend] implement handling of favicon
 [ ] [backend] add testing
 [ ] [backend] add logging - logging all requests
