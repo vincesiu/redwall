@@ -18,61 +18,18 @@
 </div>
 
 <div id="output_container">
-    {# The safe filter is used to render html without escape codes #}
-    {{rendered_content | safe}}
+    <div><h1 id="output_title">{{title}}</h1></div>
+    <div id="output_content">
+        {# The safe filter is used to render html without escape codes #}
+        {{rendered_content | safe}}
+    </div>
 </div>
 
+<script src="./static/main.js"></script>
 <script>
-function updateNote(event)  {
-    fetch('./update_note', {
-        method:'post',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            'title': document.getElementById('input_title').value,
-            'content': document.getElementById('input_content').value,
-            'note_id': document.getElementById('input_note_id').innerHTML
-        })
-    }).then(function(response) {
-      console.log('Successfully updated note id:', document.getElementById('input_note_id').innertHTML);
-    })
-};
-
-function renderMarkdown() {
-	args = arguments;
-	console.log(args);
-	event = args[0];
-    fetch('./render_markdown', {
-    method: 'post',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({content: event.target.value})
-  }).then(function(response) {
-      console.log('Markdown rendered to html: ', response);
-    return response.json();
-  }).then(function(data) {
-      document.getElementById('output_container').innerHTML = data;
-  });
-};
-
-function debounce(fn, interval) {
-    var timeoutId = undefined;
-    return function (event) {
-        if (timeoutId !== undefined) {
-            clearTimeout(timeoutId); 
-        }
-
-        timeoutId = setTimeout(() => {
-            fn(event); 
-            timeoutId = undefined;
-        }, interval);
-   }
-}
-
 document.getElementById('input_form').addEventListener('submit', updateNote);
 document.getElementById('input_content').addEventListener('input', debounce(renderMarkdown, 1000));
+document.getElementById('input_title').addEventListener('input', debounce(updateNoteTitle, 1000));
 </script>
 
 </body>

@@ -43,15 +43,19 @@
 [x] [front] implement throttling
   - 1 second
 [x] [frontend] Implement ability to go back to the main page
-[ ] [frontend][edit] impleemnt creates
+[x] [frontend][edit] impleemnt creates
   - make this a separate html page
   - add new button in the main page to create
   - auto-redirect to the edit page
   - add fetch usage in the frontend
   - onchange, send the contents of that textarea to the backend
+[x] [frontend] refactor out the javascript functions
+[ ] [frontend] add button to create new note on the main page
 [ ] [backend] implement handling of favicon
 [ ] [backend] add testing
 [ ] [backend] add logging - logging all requests
+[ ] [frontend] back to home to also save
+[x] [frontend] add rendering the title
 
 ## wishlist
 [ ] [server] autosave
