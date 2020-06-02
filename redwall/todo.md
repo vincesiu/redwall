@@ -40,7 +40,7 @@
 [x] [front] post query to markdown -> other parser
   - change the frontend parser from the markdown js library to this
 [x] [frontend] Implement ability to edit the title
-[x] [front] implement throttling
+[x] [front] implement throttling and debouncing
   - 1 second
 [x] [frontend] Implement ability to go back to the main page
 [x] [frontend][edit] impleemnt creates
@@ -58,7 +58,7 @@
 [x] [frontend] add rendering the title
 
 ## wishlist
-[ ] [server] autosave
+[x] [server] autosave
 [ ] [server][edit] change the post id from route to the get parameter
 [ ] [front] find all the html elements which I need to apply markdown to
 [ ] [front] given all the markdown elements from the previous thign, add css

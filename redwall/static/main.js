@@ -64,3 +64,18 @@ function debounce(fn, interval) {
         }, interval);
    }
 }
+
+function throttle(fn, interval) {
+    // action is executed on trailing edge
+    var timeoutId = undefined;
+    return function (event) {
+        if (timeoutId !== undefined) {
+            return;
+        }
+
+        timeoutId = setTimeout(() => {
+            fn(event); 
+            timeoutId = undefined;
+        }, interval);
+   }
+}
