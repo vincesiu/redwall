@@ -53,7 +53,7 @@
 [x] [frontend] add button to create new note on the main page
 [x] [backend] add query parameterization to sqlite storage implementation
 [x] [backend] implement handling of favicon
-[ ] [backend] add testing
+[x] [backend] add testing
 [ ] [backend] add logging - logging all requests
 [ ] [frontend] back to home to also save
 [x] [frontend] add rendering the title

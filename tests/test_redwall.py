@@ -1,3 +1,5 @@
+import sys
+sys.path.insert(0, '../')
 from redwall import __version__
 from redwall.redwall import Note, RenderEngine, Storage
 
@@ -54,12 +56,6 @@ def test_render_engine():
     markdown = "hello world"
     html = r.render_md_to_html(markdown)
     assert html == "<p>hello world</p>\n"
-
-def run_all_tests():
-    test_note_creation()
-    test_db_create_and_get()
-    test_db_create_and_get_and_update()
-    test_render_engine()
 
 if __name__ == '__main__':
     run_all_tests()
