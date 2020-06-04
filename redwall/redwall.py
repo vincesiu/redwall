@@ -76,8 +76,11 @@ class Storage:
         cursor.execute(query, {"title": note.title, "content": note.content, "id": note.id})
         self.connection.commit()
 
-    def delete_note(self):
-        raise NotImplementedError()
+    def delete_note(self, note: Note) -> None:
+        cursor = self.connection.cursor()
+        query = 'delete from notes where id = :id'
+        cursor.execute(query, {"id": note.id})
+        self.connection.commit()
 
 class RenderEngine:
     def __init__(self):
@@ -156,7 +159,8 @@ def favicon():
 @app.route('/<post_id>')
 def edit_note(post_id):
     note = storage.get_note(post_id)
-    assert note is not None
+    if note is None:
+        raise KeyError(post_id)
 
     return render_template(
         "edit_note.html",

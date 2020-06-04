@@ -54,6 +54,10 @@
 [x] [backend] add query parameterization to sqlite storage implementation
 [x] [backend] implement handling of favicon
 [x] [backend] add testing
+[x] [backend] implement note dleetion
+[ ] [frontend] implement javascript function to delete a note
+[ ] [frontend] add button to delete a note on the main page
+[ ] [frontend] add button to delete a note on the edit note page
 [ ] [backend] add logging - logging all requests
 [ ] [frontend] back to home to also save
 [x] [frontend] add rendering the title

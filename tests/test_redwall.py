@@ -1,5 +1,6 @@
 import sys
-sys.path.insert(0, '../')
+sys.path.insert(0, '../') # Required for Redwall import
+
 from redwall import __version__
 from redwall.redwall import Note, RenderEngine, Storage
 
@@ -50,6 +51,18 @@ def test_db_create_and_get_and_update():
     note2 = s.get_note(note1.id)
     assert note2.title == new_title
     assert note2.content == new_content
+
+def test_db_create_and_delete():
+    s = Storage()
+    note1 = Note(
+        title = "fake_testing_title",
+        content ="fake_testing_content",
+    )
+    s.create_note(note1)
+    note2 = s.get_note(note1.id)
+    s.delete_note(note1)
+    note3 = s.get_note(note1.id)
+    assert note3 is None
 
 def test_render_engine():
     r = RenderEngine()
