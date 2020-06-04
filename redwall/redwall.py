@@ -2,6 +2,7 @@ from flask import (
     Flask,
     render_template,
     request,
+    send_file,
 )
 import json
 import pypandoc
@@ -150,7 +151,7 @@ def create_note():
 
 @app.route('/favicon.ico')
 def favicon():
-    return "success"
+    return send_file("./static/favicon.ico", as_attachment=True)
 
 @app.route('/<post_id>')
 def edit_note(post_id):
