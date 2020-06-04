@@ -51,6 +51,7 @@
   - onchange, send the contents of that textarea to the backend
 [x] [frontend] refactor out the javascript functions
 [x] [frontend] add button to create new note on the main page
+[x] [backend] add query parameterization to sqlite storage implementation
 [ ] [backend] implement handling of favicon
 [ ] [backend] add testing
 [ ] [backend] add logging - logging all requests

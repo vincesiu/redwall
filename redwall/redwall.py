@@ -51,14 +51,14 @@ class Storage:
 
     def create_note(self, note: Note):
         cursor = self.connection.cursor()
-        query = 'insert into notes (id, title, content) values ("{}", "{}", "{}")'.format(note.id, note.title, note.content)
-        cursor.execute(query)
+        query = 'insert into notes (id, title, content) values (:id, :title, :content)'
+        cursor.execute(query, {"id": note.id, "title": note.title, "content": note.content})
         self.connection.commit()
 
     def get_note(self, note_id: str) -> Optional[Note]:
         cursor = self.connection.cursor()
-        query = 'select id, title, content from notes where id = "{}"'.format(note_id)
-        cursor.execute(query)
+        query = 'select id, title, content from notes where id = :id'
+        cursor.execute(query, {"id": note_id})
         results = cursor.fetchone()
         if results == None:
            return None
@@ -71,8 +71,8 @@ class Storage:
        
     def update_note(self, note: Note) -> None:
         cursor = self.connection.cursor()
-        query = 'update notes set title = "{}", content = "{}" where id = "{}"'.format(note.title, note.content, note.id)
-        cursor.execute(query)
+        query = 'update notes set title = :title, content = :content where id = :id'
+        cursor.execute(query, {"title": note.title, "content": note.content, "id": note.id})
         self.connection.commit()
 
     def delete_note(self):
