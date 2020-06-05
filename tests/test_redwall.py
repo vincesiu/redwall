@@ -60,7 +60,8 @@ def test_db_create_and_delete():
     )
     s.create_note(note1)
     note2 = s.get_note(note1.id)
-    s.delete_note(note1)
+    assert note2 is not None
+    s.delete_note(note1.id)
     note3 = s.get_note(note1.id)
     assert note3 is None
 

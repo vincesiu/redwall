@@ -29,8 +29,27 @@ function updateNote(event)  {
         })
     }).then(function(response) {
       console.log('Successfully updated note id:', document.getElementById('input_note_id').innerHTML);
-    })
+    });
 };
+
+function deleteNoteWrapper(event) {
+    deleteNote(event.target.id);
+}
+
+function deleteNote(note_id) {
+    fetch('./delete_note', {
+        method:'post',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            'note_id': note_id
+        })
+    }).then(function(response) {
+        window.location.href = './';
+    });
+}
+
 
 function updateNoteTitle(event) {
     document.getElementById('output_title').innerHTML = document.getElementById('input_title').value;

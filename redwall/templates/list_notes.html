@@ -9,8 +9,14 @@
     <a href="./create_note">Create new note</a>
     <ul id="navigation">
     {% for note in notes %}
-        <li><a href="{{ note.href }}">{{ note.caption }}</a></li>
+        <li><a href="{{ note.href }}">{{ note.caption }}</a> <button class="delete_note" id="{{ note.note_id }}" type="button">Delete</button></li>
     {% endfor %}
     </ul>
 
+<script src="./static/main.js"></script>
+<script>
+Array.from(document.getElementsByClassName("delete_note")).forEach((button) => button.addEventListener("click", deleteNoteWrapper));
+</script>
+
 </body>
+

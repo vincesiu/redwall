@@ -76,10 +76,10 @@ class Storage:
         cursor.execute(query, {"title": note.title, "content": note.content, "id": note.id})
         self.connection.commit()
 
-    def delete_note(self, note: Note) -> None:
+    def delete_note(self, note_id: str) -> None:
         cursor = self.connection.cursor()
         query = 'delete from notes where id = :id'
-        cursor.execute(query, {"id": note.id})
+        cursor.execute(query, {"id": note_id})
         self.connection.commit()
 
 class RenderEngine:
@@ -94,7 +94,7 @@ storage = Storage()
 render_engine = RenderEngine()
 
 from collections import namedtuple
-FormattedNote = namedtuple('FormattedNote', ['href', 'caption'])
+FormattedNote = namedtuple('FormattedNote', ['href', 'caption', 'note_id'])
 
 
 @app.route('/')
@@ -105,6 +105,7 @@ def list_notes():
         formatted_notes.append(FormattedNote(
             href="./{}".format(note.id),
             caption=note.title,
+            note_id=note.id,
         ))
 
     return render_template(
@@ -125,6 +126,10 @@ def render_markdown():
     print("render markdown called with the arguments {}".format(request.json))
     unrendered = request.json["content"]
     return json.dumps(render_engine.render_md_to_html(unrendered))
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_file("./static/favicon.ico", as_attachment=True)
 
 @app.route('/update_note', methods=['POST'])
 def update_note():
@@ -152,10 +157,6 @@ def create_note():
         storage.create_note(note)
         return json.dumps(note.id)
 
-@app.route('/favicon.ico')
-def favicon():
-    return send_file("./static/favicon.ico", as_attachment=True)
-
 @app.route('/<post_id>')
 def edit_note(post_id):
     note = storage.get_note(post_id)
@@ -169,4 +170,13 @@ def edit_note(post_id):
         unrendered_content=note.content,
         rendered_content=render_engine.render_md_to_html(note.content),
     )
+
+@app.route('/delete_note', methods=['POST'])
+def delete_note():
+    print("Delete note called with {}".format(request.json))
+    note = storage.get_note(request.json['note_id'])
+    if note is None:
+        raise KeyError(post_id)
+    storage.delete_note(note.id)
+    return json.dumps(note.id)
 
