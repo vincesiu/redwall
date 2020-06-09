@@ -21,6 +21,19 @@
 
 <script src="./static/main.js"></script>
 <script>
+var createNoteWrapper = function (event) {
+    event.preventDefault();
+    var title = document.getElementById('input_title').value;
+    var content = document.getElementById('input_content').value;
+    var promise = createNote(title, content);
+    promise.then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        window.location.href = `./${data}`;
+    });
+
+}
+
 document.getElementById('input_form').addEventListener('submit', createNoteWrapper);
 document.getElementById('input_content').addEventListener('input', debounce(renderMarkdown, 1000));
 </script>

@@ -1,16 +1,3 @@
-function createNoteWrapper(event) {
-    event.preventDefault();
-    var title = document.getElementById('input_title').value;
-    var content = document.getElementById('input_content').value;
-    var promise = createNote(title, content);
-    promise.then(function(response) {
-        return response.json();
-    }).then(function(data) {
-        window.location.href = `./${data}`;
-    });
-
-}
-
 function createNote(title, content)  {
     return fetch('./create_note', {
         method:'post',
@@ -23,17 +10,6 @@ function createNote(title, content)  {
         })
     });
 };
-
-function updateNoteWrapper(event) {
-    var title = document.getElementById('input_title').value;
-    var content = document.getElementById('input_content').value;
-    var note_id = document.getElementById('input_note_id').innerHTML;
-    var promise = updateNote(note_id, title, content);
-    promise.then(function(response) {
-      console.log('Successfully updated note id:', document.getElementById('input_note_id').innerHTML);
-    });
-    
-}
 
 function updateNote(event)  {
     return fetch('./update_note', {
@@ -48,17 +24,6 @@ function updateNote(event)  {
         })
     });
 };
-
-function deleteNoteWrapper(event) {
-    var c = confirm("Are you sure you want to delete this note?");
-    console.log(c);
-    if (c === true) {
-        var promise = deleteNote(event.target.id);
-        promise.then(function(response) {
-            window.location.href = './';
-        });
-    }
-}
 
 function deleteNote(note_id) {
     return fetch('./delete_note', {

@@ -27,6 +27,16 @@
 
 <script src="./static/main.js"></script>
 <script>
+
+var updateNoteWrapper = function (event) {
+    var title = document.getElementById('input_title').value;
+    var content = document.getElementById('input_content').value;
+    var note_id = document.getElementById('input_note_id').innerHTML;
+    var promise = updateNote(note_id, title, content);
+    promise.then(function(response) {
+      console.log('Successfully updated note id:', document.getElementById('input_note_id').innerHTML);
+    });
+}
 document.getElementById('input_form').addEventListener('submit', updateNoteWrapper);
 document.getElementById('input_content').addEventListener('input', throttle(renderMarkdown, 1000));
 document.getElementById('input_content').addEventListener('input', debounce(updateNoteWrapper, 1000));
