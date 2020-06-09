@@ -59,9 +59,9 @@
 [x] [frontend] add button to delete a note on the main page
 [x] [frontend] add confirmation dialogue before deleting a note
 [x] [frontend] refactor main.js to take better arguments and hoist any local HTML variables
-[ ] [frontend] add button to delete a note on the edit note page
+[x] [frontend] add button to delete a note on the edit note page
 [ ] [backend] add logging - logging all requests
-[ ] [frontend] back to home to also save
+[x] [frontend] back to home to also save
 [x] [frontend] add rendering the title
 
 ## wishlist
