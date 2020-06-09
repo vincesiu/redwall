@@ -33,7 +33,11 @@ function updateNote(event)  {
 };
 
 function deleteNoteWrapper(event) {
-    deleteNote(event.target.id);
+    var c = confirm("Are you sure you want to delete this note?");
+    console.log(c);
+    if (c === true) {
+        deleteNote(event.target.id);
+    }
 }
 
 function deleteNote(note_id) {
