@@ -39,9 +39,9 @@ var updateNoteWrapper = function (event) {
 }
 document.getElementById('input_form').addEventListener('submit', updateNoteWrapper);
 document.getElementById('input_content').addEventListener('input', throttle(renderMarkdown, 1000));
-document.getElementById('input_content').addEventListener('input', debounce(updateNoteWrapper, 1000));
+document.getElementById('input_content').addEventListener('input', debounce(updateNoteWrapper, 10000));
 document.getElementById('input_title').addEventListener('input', throttle(updateNoteTitle, 1000));
-document.getElementById('input_title').addEventListener('input', debounce(updateNoteTitle, 10000));
+document.getElementById('input_title').addEventListener('input', debounce(updateNoteWrapper, 10000));
 </script>
 
 </body>
