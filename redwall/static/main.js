@@ -1,23 +1,42 @@
-function createNote(event)  {
+function createNoteWrapper(event) {
     event.preventDefault();
-    fetch('./create_note', {
+    var title = document.getElementById('input_title').value;
+    var content = document.getElementById('input_content').value;
+    var promise = createNote(title, content);
+    promise.then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        window.location.href = `./${data}`;
+    });
+
+}
+
+function createNote(title, content)  {
+    return fetch('./create_note', {
         method:'post',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            'title': document.getElementById('input_title').value,
-            'content': document.getElementById('input_content').value,
+            'title': title,
+            'content': content,
         })
-    }).then(function(response) {
-        return response.json();
-    }).then(function(data) {
-        window.location.href = `./${data}`;
     });
 };
 
+function updateNoteWrapper(event) {
+    var title = document.getElementById('input_title').value;
+    var content = document.getElementById('input_content').value;
+    var note_id = document.getElementById('input_note_id').innerHTML;
+    var promise = updateNote(note_id, title, content);
+    promise.then(function(response) {
+      console.log('Successfully updated note id:', document.getElementById('input_note_id').innerHTML);
+    });
+    
+}
+
 function updateNote(event)  {
-    fetch('./update_note', {
+    return fetch('./update_note', {
         method:'post',
         headers: {
             'Content-Type': 'application/json',
@@ -27,8 +46,6 @@ function updateNote(event)  {
             'content': document.getElementById('input_content').value,
             'note_id': document.getElementById('input_note_id').innerHTML
         })
-    }).then(function(response) {
-      console.log('Successfully updated note id:', document.getElementById('input_note_id').innerHTML);
     });
 };
 
@@ -36,12 +53,15 @@ function deleteNoteWrapper(event) {
     var c = confirm("Are you sure you want to delete this note?");
     console.log(c);
     if (c === true) {
-        deleteNote(event.target.id);
+        var promise = deleteNote(event.target.id);
+        promise.then(function(response) {
+            window.location.href = './';
+        });
     }
 }
 
 function deleteNote(note_id) {
-    fetch('./delete_note', {
+    return fetch('./delete_note', {
         method:'post',
         headers: {
         'Content-Type': 'application/json',
@@ -49,8 +69,6 @@ function deleteNote(note_id) {
         body: JSON.stringify({
             'note_id': note_id
         })
-    }).then(function(response) {
-        window.location.href = './';
     });
 }
 
