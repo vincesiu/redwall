@@ -9,7 +9,7 @@
     <a href="./create_note">Create new note</a>
     <ul id="navigation">
     {% for note in notes %}
-        <li><a href="{{ note.href }}">{{ note.caption }}</a> <button class="delete_note" id="{{ note.note_id }}" type="button">Delete</button></li>
+    <li> <button class="delete_note" id="{{ note.note_id }}" type="button">Delete</button> <a href="{{ note.href }}">{{ note.caption }}</a> </li>
     {% endfor %}
     </ul>
 
