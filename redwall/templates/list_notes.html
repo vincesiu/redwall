@@ -29,24 +29,23 @@ var deleteNoteWrapper = function (event) {
 Array.from(document.getElementsByClassName("delete_note")).forEach((button) => button.addEventListener("click", deleteNoteWrapper));
 
 var rows = Array.from(document.getElementById('navigation').childNodes).filter( x => x.nodeType === 1 );
-// Selection sort
-for (i = 0; i < (rows.length - 1); i++) {
-   rows.forEach(x => console.log(x.innerText));
-   var smallest = i
-   for (j = i + 1; j < (rows.length); j++) {
-       if (rows[j].innerText < rows[smallest].innerText) {
-           smallest = j;
-       }
-   }
-   if (smallest !== i) {
-       var tmp = rows[i];
-       rows[i] = rows[smallest];
-       rows[smallest] = tmp;
-   }
+
+var compareFunctionLexical = function(a, b) {
+    if (a.innerText > b.innerText) {
+        return 1;
+    } else if (a.innerText === b.innerText) {
+        return 0;
+    } else {
+        return -1;
+    }
 }
+
+rows.sort(compareFunctionLexical);
+
 for (i = (rows.length - 1); i > 0; i--) {
    rows[i].parentNode.insertBefore(rows[i - 1], rows[i]);
 }
+
 </script>
 
 </body>
