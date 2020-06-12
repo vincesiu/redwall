@@ -8,9 +8,9 @@
 <body>
     <a href="./create_note">Create new note</a>
     <ul id="navigation">
-    {% for note in notes %}
-    <li> <button class="delete_note" id="{{ note.note_id }}" type="button">Delete</button> <a href="{{ note.href }}">{{ note.caption }}</a> </li>
-    {% endfor %}
+        {% for note in notes %}
+        <li> <button class="delete_note" id="{{ note.note_id }}" type="button">Delete</button> <a href="{{ note.href }}">{{ note.caption }}</a> </li>
+        {% endfor %}
     </ul>
 
 <script src="./static/main.js"></script>
@@ -27,6 +27,26 @@ var deleteNoteWrapper = function (event) {
 }
 
 Array.from(document.getElementsByClassName("delete_note")).forEach((button) => button.addEventListener("click", deleteNoteWrapper));
+
+var rows = Array.from(document.getElementById('navigation').childNodes).filter( x => x.nodeType === 1 );
+// Selection sort
+for (i = 0; i < (rows.length - 1); i++) {
+   rows.forEach(x => console.log(x.innerText));
+   var smallest = i
+   for (j = i + 1; j < (rows.length); j++) {
+       if (rows[j].innerText < rows[smallest].innerText) {
+           smallest = j;
+       }
+   }
+   if (smallest !== i) {
+       var tmp = rows[i];
+       rows[i] = rows[smallest];
+       rows[smallest] = tmp;
+   }
+}
+for (i = (rows.length - 1); i > 0; i--) {
+   rows[i].parentNode.insertBefore(rows[i - 1], rows[i]);
+}
 </script>
 
 </body>

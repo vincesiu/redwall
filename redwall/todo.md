@@ -63,6 +63,16 @@
 [ ] [backend] add logging - logging all requests
 [x] [frontend] back to home to also save
 [x] [frontend] add rendering the title
+[x] [frontend] implement sorting by lexical order
+[ ] [server] add extra fields 
+  - atime, ctime, mtime, tags
+[ ] [backend] implement those extra fields
+[ ] [frontend] display extra fields and store them as attributes in the 'li' list
+  - ctime
+  - mtime
+[ ] [frontend] add other attributes to sort by
+[ ] [frontend] implement sort function and refactor it nicely
+[ ] [frontend] tags, and filtering by tags
 
 ## wishlist
 [x] [server] autosave
@@ -70,22 +80,11 @@
 [ ] [front] find all the html elements which I need to apply markdown to
 [ ] [front] given all the markdown elements from the previous thign, add css
 [ ] [front] overall page css
-[ ] [server] add extra fields 
-  - atime, ctime, mtime, tags
-[ ] [frontend] display extra fields
-  - ctime
-  - mtime
 [ ] [frontend] add tags
 [ ] [frontend] add searching by tags and by title
 [ ] [server] 404 or some other error handling if the post_id does not exist
 [ ] [frontend] 404 error page if the post_id does not exist
 [ ] [server] see what happens if an exception is thrown - 504 or something?
-[ ] [server] delete note
-  - implement db endpoint to delete note
-[ ] [frontend] delete note
-  - button to send request + confirmation to delete note
-  - send request to backend
-  - redirect page back to main
 
 ## goals
 
